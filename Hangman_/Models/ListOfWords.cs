@@ -9,10 +9,12 @@ namespace Hangman_.Models
 {
     public class ListOfWords
     {
-        public string Fruits { get; set; }
+        public string Word { get; set; }
 
-        public string Animals { get; set; }
+        //public string Fruits { get; set; }
 
-        public string Colors { get; set; }
+        //public string Animals { get; set; }
+
+        //public string Colors { get; set; }
     }
 }

@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vm="clr-namespace:Hangman_.ViewModels"
              xmlns:local="clr-namespace:Hangman_.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-            
+    <Grid Background="White">
+        <StackPanel Orientation="Horizontal">
+            <Button Command="{Binding StartGameCommand, Source={x:Static vm:MainViewModel.Instance}}" CommandParameter="animals" Content="Animals" Height="30" Width="71"/>
+            <Button Command="{Binding StartGameCommand, Source={x:Static vm:MainViewModel.Instance}}" CommandParameter="fruits" Content="Fruits" Height="30" Width="71"/>
+            <Button Command="{Binding StartGameCommand, Source={x:Static vm:MainViewModel.Instance}}" CommandParameter="colors" Content="Colors" Height="30" Width="71"/>
+        </StackPanel>
+      
+
     </Grid>
 </UserControl>
