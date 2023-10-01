@@ -1,4 +1,5 @@
 ﻿using Hangman_.Commands;
+using Hangman_.Enums;
 using Hangman_.Models;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,8 @@ namespace Hangman_.ViewModels
 
         public List<AlphabetLetter> Alphabet { get; set; }
 
-        public List<char> CharsOfRandomWord { get; set; }
+        public List<WordChar> CharsOfRandomWord { get; set; }
+
 
         public GameViewModel(string randomWord)
         {
@@ -28,11 +30,19 @@ namespace Hangman_.ViewModels
             CreateListOfAlphabet();
             CreateListOfChars();
 
-            GuessLetterCommand = new RelayCommand(letter => GuessLetter((char)letter));
+            GuessLetterCommand = new RelayCommand(guessedLetter => GuessLetter(guessedLetter));
         }
 
-        private void GuessLetter(char letter)
+        private void GuessLetter(object guessedLetter)
         {
+
+            foreach (WordChar c in CharsOfRandomWord)
+            {
+                if (c.LetterOfWord == (char)guessedLetter)
+                {
+                    c.CharVisibility = LetterVisibilityStatus.GuessCorrect;
+                }
+            }
         }
 
         public void CreateListOfAlphabet()
@@ -53,12 +63,19 @@ namespace Hangman_.ViewModels
 
         public void CreateListOfChars()
         {
-            CharsOfRandomWord = new List<char>();
+            CharsOfRandomWord = new List<WordChar>();
 
             foreach (char c in RandomWord)
             {
                 char upperC = Char.ToUpper(c);
-                CharsOfRandomWord.Add(upperC);
+
+                var letter = new WordChar
+                {
+                    LetterOfWord = upperC,
+                    CharVisibility = LetterVisibilityStatus.GuessWrong,
+                };
+
+                CharsOfRandomWord.Add(letter);
             }
         }
     }
