@@ -28,15 +28,17 @@ namespace Hangman_.DAL
             await using var dataSource = NpgsqlDataSource.Create(_connectionString);
             await using var command = dataSource.CreateCommand(stmt);
             await using var reader = await command.ExecuteReaderAsync();
-            
+
             while (await reader.ReadAsync())
             {
                 if (!reader.IsDBNull(0))
                 {
-                    wordsByTheme.Add(reader.GetString(0));
+                    string word = reader.GetString(0);
+                    wordsByTheme.Add(word);
                 }
             }
             return wordsByTheme;
         }
+
     }
 }
