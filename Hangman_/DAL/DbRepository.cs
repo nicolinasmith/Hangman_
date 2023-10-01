@@ -36,10 +36,7 @@ namespace Hangman_.DAL
                     wordsByTheme.Add(reader.GetString(0));
                 }
             }
-
             return wordsByTheme;
         }
-
-
     }
 }

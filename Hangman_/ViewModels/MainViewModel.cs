@@ -27,18 +27,28 @@ namespace Hangman_.ViewModels
 
         public string RandomWord { get; set; }
 
-        public IEnumerable<string> WordsByTheme { get; private set; }
+        public List<string> WordsByTheme { get; private set; }
 
 
         public MainViewModel()
         {
-            StartGameCommand = new RelayCommand(chosenTheme => GetRandomWordByTheme(chosenTheme));
+            StartGameCommand = new RelayCommand(chosenTheme => StartGame(chosenTheme));
         }
 
-        public async void GetRandomWordByTheme(object chosenTheme)
+        public void StartGame(object chosenTheme)
         {
-            WordsByTheme = await db.GetListFromChosenTheme(chosenTheme.ToString());
-            MessageBox.Show("hej");
+            GetRandomWordByTheme(chosenTheme.ToString());
+            MainViewModel.Instance.CurrentViewModel = new GameViewModel(RandomWord);
+        }
+
+
+        public async void GetRandomWordByTheme(string chosenTheme)
+        {
+            WordsByTheme = (List<string>)await db.GetListFromChosenTheme(chosenTheme);
+
+            Random random = new Random();
+            int randomIndex = random.Next(0, WordsByTheme.Count());
+            RandomWord = WordsByTheme[randomIndex];
         }
     }
 }
