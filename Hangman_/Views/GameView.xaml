@@ -4,10 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:Hangman_.ViewModels"
-             xmlns:local="clr-namespace:Hangman_.Views" d:DataContext="{d:DesignInstance Type=vm:FinishedViewModel}"
+             xmlns:converter="clr-namespace:Hangman_.Converters"
+             xmlns:local="clr-namespace:Hangman_.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-
+    <UserControl.Resources>
+        <converter:LetterVisibilityConverter x:Key="LetterVisibilityConverter"/>
+    </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -33,7 +36,7 @@
                 <DataTemplate>
                     <Button Content="{Binding Letter}" 
                             Command="{Binding DataContext.GuessLetterCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                            CommandParameter="{Binding}" 
+                            CommandParameter="{Binding Letter}" 
                             Margin="5" 
                             Width="30" 
                             Height="20"
@@ -51,8 +54,8 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="3">
-                        <TextBlock Text="{Binding}" 
-                                   Visibility="Hidden" 
+                        <TextBlock Text="{Binding LetterOfWord}" 
+                                   Visibility="{Binding CharVisibility, Converter={StaticResource LetterVisibilityConverter}}"
                                    Margin="5" 
                                    TextAlignment="Center" 
                                    Width="30" 
