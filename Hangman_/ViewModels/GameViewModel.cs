@@ -1,4 +1,5 @@
 ﻿using Hangman_.Commands;
+using Hangman_.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,9 @@ namespace Hangman_.ViewModels
 
         public string RandomWord { get; set; }
 
-        public bool LetterIsEnabled { get; set; } = true;
-
-        public List<char> Alphabet { get; set; }
+        public List<AlphabetLetter> Alphabet { get; set; }
 
         public List<char> CharsOfRandomWord { get; set; }
-
 
         public GameViewModel(string randomWord)
         {
@@ -35,16 +33,21 @@ namespace Hangman_.ViewModels
 
         private void GuessLetter(char letter)
         {
-            MessageBox.Show("HEJ");
         }
 
         public void CreateListOfAlphabet()
         {
-            Alphabet = new List<char>();
+            Alphabet = new List<AlphabetLetter>();
 
             for (char letter = 'A'; letter <= 'Z'; letter++)
             {
-                Alphabet.Add(letter);
+                var alphabetLetter = new AlphabetLetter
+                {
+                    Letter = letter,
+                    LetterIsEnabled = true, 
+                };
+
+                Alphabet.Add(alphabetLetter);
             }
         }
 
