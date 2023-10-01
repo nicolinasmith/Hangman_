@@ -1,9 +1,19 @@
 ﻿<Application x:Class="Hangman_.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:Hangman_.ViewModels"
+             xmlns:views="clr-namespace:Hangman_.Views"
              xmlns:local="clr-namespace:Hangman_"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <DataTemplate DataType="{x:Type vm:GameViewModel}">
+            <views:GameView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:StartViewModel}">
+            <views:StartView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:FinishedViewModel}">
+            <views:FinishedView/>
+        </DataTemplate>
     </Application.Resources>
 </Application>
