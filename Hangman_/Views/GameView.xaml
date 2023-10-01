@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:Hangman_.ViewModels"
-             xmlns:local="clr-namespace:Hangman_.Views"
+             xmlns:local="clr-namespace:Hangman_.Views" d:DataContext="{d:DesignInstance Type=vm:FinishedViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -30,7 +31,7 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding}" Margin="5" Width="30" Height="20"/>
+                    <Button Content="{Binding}" Command="{Binding DataContext.GuessLetterCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" CommandParameter="{Binding}" Margin="5" Width="30" Height="20"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
