@@ -5,14 +5,17 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vm="clr-namespace:Hangman_.ViewModels"
              xmlns:converter="clr-namespace:Hangman_.Converters"
-             xmlns:local="clr-namespace:Hangman_.Views"
+             xmlns:local="clr-namespace:Hangman_.Views" d:DataContext="{d:DesignInstance Type=vm:GameViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <converter:LetterVisibilityConverter x:Key="LetterVisibilityConverter"/>
+        <converter:HangmanConverter x:Key="HangmanConverter"/>
     </UserControl.Resources>
+    
     <Grid Background="White">
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -23,9 +26,9 @@
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding RandomWord, Source={x:Static vm:MainViewModel.Instance}}" Grid.Row="0" Grid.Column="0" FontSize="20"/>
-
         <ItemsControl ItemsSource="{Binding Alphabet}" Grid.Row="2" Grid.Column="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -64,5 +67,15 @@
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
+        <Border BorderBrush="Black"
+                BorderThickness="3"
+                Grid.Row="4" 
+                Grid.Column="3"
+                Height="300" 
+                Width="300" >
+                <Image 
+                   Stretch="Fill"
+                   Source="{Binding Status, Converter={StaticResource HangmanConverter}}"/>
+        </Border>
     </Grid>
 </UserControl>

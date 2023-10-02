@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Hangman_.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+    <Grid Background="Black" Width="500" Height="500">
             
     </Grid>
 </UserControl>

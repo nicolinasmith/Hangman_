@@ -22,12 +22,12 @@ namespace Hangman_.ViewModels
 
         public List<CharsOfWord> CharsOfRandomWord { get; set; }
 
-        int count = 0;
-
+        public HangmanStatus Status { get; set; }
 
         public GameViewModel(string randomWord)
         {
             RandomWord = randomWord;
+            Status = HangmanStatus.First_Wrong;
 
             CreateListOfAlphabet();
             CreateListOfChars();
@@ -68,6 +68,7 @@ namespace Hangman_.ViewModels
                 CharsOfRandomWord.Add(letter);
             }
         }
+
         private void GuessLetter(object guessedLetter)
         {
             foreach (CharsOfWord c in CharsOfRandomWord)
@@ -75,7 +76,6 @@ namespace Hangman_.ViewModels
                 if (c.WordChar == (char)guessedLetter)
                 {
                     c.CharVisibility = LetterVisibilityStatus.GuessCorrect;
-                    CountToFinishedGame();
                 }
             }
 
@@ -86,10 +86,14 @@ namespace Hangman_.ViewModels
                     c.IsEnabled = false;
                 }
             }
+
+            CalculateGuess();
         }
 
-        private void CountToFinishedGame()
+        private void CalculateGuess()
         {
+            int count = 0;
+
             foreach (CharsOfWord c in CharsOfRandomWord)
             {
                 if (c.CharVisibility == LetterVisibilityStatus.GuessCorrect)
@@ -99,7 +103,7 @@ namespace Hangman_.ViewModels
             }
             if (count == CharsOfRandomWord.Count)
             {
-                MessageBox.Show("hej");
+                //MainViewModel.Instance.CurrentViewModel = new FinishedViewModel();
             }
         }
     }
