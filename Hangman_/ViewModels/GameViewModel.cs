@@ -22,6 +22,8 @@ namespace Hangman_.ViewModels
 
         public List<CharsOfWord> CharsOfRandomWord { get; set; }
 
+        int count = 0;
+
 
         public GameViewModel(string randomWord)
         {
@@ -31,25 +33,6 @@ namespace Hangman_.ViewModels
             CreateListOfChars();
 
             GuessLetterCommand = new RelayCommand(guessedLetter => GuessLetter(guessedLetter));
-        }
-
-        private void GuessLetter(object guessedLetter)
-        {
-            foreach (CharsOfWord c in CharsOfRandomWord)
-            {
-                if (c.WordChar == (char)guessedLetter)
-                {
-                    c.CharVisibility = LetterVisibilityStatus.GuessCorrect;
-                }
-            }
-
-            foreach (AlphabetButton c in Alphabet)
-            {
-                if (c.AlphabetChar== (char)guessedLetter)
-                {
-                    c.IsEnabled = false;
-                }
-            }
         }
 
         public void CreateListOfAlphabet()
@@ -83,6 +66,40 @@ namespace Hangman_.ViewModels
                 };
 
                 CharsOfRandomWord.Add(letter);
+            }
+        }
+        private void GuessLetter(object guessedLetter)
+        {
+            foreach (CharsOfWord c in CharsOfRandomWord)
+            {
+                if (c.WordChar == (char)guessedLetter)
+                {
+                    c.CharVisibility = LetterVisibilityStatus.GuessCorrect;
+                    CountToFinishedGame();
+                }
+            }
+
+            foreach (AlphabetButton c in Alphabet)
+            {
+                if (c.AlphabetChar == (char)guessedLetter)
+                {
+                    c.IsEnabled = false;
+                }
+            }
+        }
+
+        private void CountToFinishedGame()
+        {
+            foreach (CharsOfWord c in CharsOfRandomWord)
+            {
+                if (c.CharVisibility == LetterVisibilityStatus.GuessCorrect)
+                {
+                    count++;
+                }
+            }
+            if (count == CharsOfRandomWord.Count)
+            {
+                MessageBox.Show("hej");
             }
         }
     }
