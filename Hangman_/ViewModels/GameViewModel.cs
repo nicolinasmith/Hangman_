@@ -18,9 +18,9 @@ namespace Hangman_.ViewModels
 
         public string RandomWord { get; set; }
 
-        public List<AlphabetLetter> Alphabet { get; set; }
+        public List<AlphabetButton> Alphabet { get; set; }
 
-        public List<WordChar> CharsOfRandomWord { get; set; }
+        public List<CharsOfWord> CharsOfRandomWord { get; set; }
 
 
         public GameViewModel(string randomWord)
@@ -35,26 +35,33 @@ namespace Hangman_.ViewModels
 
         private void GuessLetter(object guessedLetter)
         {
-            foreach (WordChar c in CharsOfRandomWord)
+            foreach (CharsOfWord c in CharsOfRandomWord)
             {
-                if (c.LetterOfWord == (char)guessedLetter)
+                if (c.WordChar == (char)guessedLetter)
                 {
                     c.CharVisibility = LetterVisibilityStatus.GuessCorrect;
-                    //guessedLetter.LetterIsEnabled = false;
+                }
+            }
+
+            foreach (AlphabetButton c in Alphabet)
+            {
+                if (c.AlphabetChar== (char)guessedLetter)
+                {
+                    c.IsEnabled = false;
                 }
             }
         }
 
         public void CreateListOfAlphabet()
         {
-            Alphabet = new List<AlphabetLetter>();
+            Alphabet = new List<AlphabetButton>();
 
             for (char letter = 'A'; letter <= 'Z'; letter++)
             {
-                var alphabetLetter = new AlphabetLetter
+                var alphabetLetter = new AlphabetButton
                 {
-                    Letter = letter,
-                    LetterIsEnabled = true, 
+                    AlphabetChar = letter,
+                    IsEnabled = true,
                 };
 
                 Alphabet.Add(alphabetLetter);
@@ -63,15 +70,15 @@ namespace Hangman_.ViewModels
 
         public void CreateListOfChars()
         {
-            CharsOfRandomWord = new List<WordChar>();
+            CharsOfRandomWord = new List<CharsOfWord>();
 
             foreach (char c in RandomWord)
             {
                 char upperC = Char.ToUpper(c);
 
-                var letter = new WordChar
+                var letter = new CharsOfWord
                 {
-                    LetterOfWord = upperC,
+                    WordChar = upperC,
                     CharVisibility = LetterVisibilityStatus.GuessWrong,
                 };
 

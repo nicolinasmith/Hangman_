@@ -8,9 +8,9 @@ using System.Windows;
 
 namespace Hangman_.Models
 {
-    public class WordChar : DependencyObject
+    public class CharsOfWord : DependencyObject
     {
-        public char LetterOfWord { get; set; }
+        public char WordChar { get; set; }
 
         public LetterVisibilityStatus CharVisibility
         {
@@ -19,7 +19,7 @@ namespace Hangman_.Models
         }
 
         public static readonly DependencyProperty CharVisibilityProperty =
-            DependencyProperty.Register("CharVisibility", typeof(LetterVisibilityStatus), typeof(WordChar), new PropertyMetadata(LetterVisibilityStatus.GuessWrong));
+            DependencyProperty.Register("CharVisibility", typeof(LetterVisibilityStatus), typeof(CharsOfWord), new PropertyMetadata(LetterVisibilityStatus.GuessWrong));
 
     }
 }

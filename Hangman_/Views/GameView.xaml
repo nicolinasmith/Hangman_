@@ -34,13 +34,13 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Button Content="{Binding Letter}" 
+                    <Button Content="{Binding AlphabetChar}" 
                             Command="{Binding DataContext.GuessLetterCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                            CommandParameter="{Binding Letter}" 
+                            CommandParameter="{Binding AlphabetChar}" 
                             Margin="5" 
                             Width="30" 
                             Height="20"
-                            IsEnabled="{Binding LetterIsEnabled}"/>
+                            IsEnabled="{Binding IsEnabled}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
@@ -54,7 +54,7 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Border BorderBrush="Black" BorderThickness="3">
-                        <TextBlock Text="{Binding LetterOfWord}" 
+                        <TextBlock Text="{Binding WordChar}" 
                                    Visibility="{Binding CharVisibility, Converter={StaticResource LetterVisibilityConverter}}"
                                    Margin="5" 
                                    TextAlignment="Center" 
