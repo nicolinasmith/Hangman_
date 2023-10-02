@@ -71,11 +71,11 @@
                 BorderThickness="3"
                 Grid.Row="4" 
                 Grid.Column="3"
-                Height="300" 
-                Width="300" >
+                Height="500" 
+                Width="400" >
                 <Image 
                    Stretch="Fill"
-                   Source="{Binding Status, Converter={StaticResource HangmanConverter}}"/>
+                   Source="{Binding Path=Hangman.HangmanStatus, Converter={StaticResource HangmanConverter}}"/>
         </Border>
     </Grid>
 </UserControl>

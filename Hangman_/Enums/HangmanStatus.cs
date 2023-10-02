@@ -8,6 +8,6 @@ namespace Hangman_.Enums
 {
     public enum HangmanStatus
     {
-        No_Guess, First_Wrong, Second_Wrong, Third_Wrong, Fourth_Wrong, Fifth_Wrong, Sixth_Wrong, Eight_Wrong, Nine_Wrong, Ten_Wrong
+        NoGuess, Wrong1, Wrong2, Wrong3, Wrong4, Wrong5, Wrong6, Wrong7, Wrong8, Wrong9, Wrong10
     }
 }

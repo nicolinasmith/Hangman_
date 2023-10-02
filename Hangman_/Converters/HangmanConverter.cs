@@ -21,20 +21,39 @@ namespace Hangman_.Converters
 
             switch (hangmanStatus)
             {
-                case HangmanStatus.No_Guess:
-                    var image = new Image();
-                    var imageUri = new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/0Guess.jpg");
-                    var bitmapImage = new BitmapImage(imageUri);
-                    image.Source = bitmapImage;
-                    return image;
+                case HangmanStatus.NoGuess:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/0Guess.jpg");
 
-                case HangmanStatus.First_Wrong:
-                    var image1 = new Image();
-                    var imageUri1 = new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/1Guess.jpg");
-                    var bitmapImage1 = new BitmapImage(imageUri1);
-                    image1.Source = bitmapImage1;
-                    return image1;
-                   
+                case HangmanStatus.Wrong1:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/1Guess.jpg");
+
+                case HangmanStatus.Wrong2:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/2Guess.jpg");
+
+                case HangmanStatus.Wrong3:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/3Guess.jpg");
+
+                case HangmanStatus.Wrong4:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/4Guess.jpg");
+
+                case HangmanStatus.Wrong5:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/5Guess.jpg");
+
+                case HangmanStatus.Wrong6:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/6Guess.jpg");
+
+                case HangmanStatus.Wrong7:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/7Guess.jpg");
+
+                case HangmanStatus.Wrong8:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/8Guess.jpg");
+
+                case HangmanStatus.Wrong9:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/9Guess.jpg");
+
+                case HangmanStatus.Wrong10:
+                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/10Guess.jpg");
+
                 default:
                     throw new NotImplementedException();
             }

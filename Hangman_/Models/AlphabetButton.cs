@@ -12,5 +12,6 @@ namespace Hangman_.Models
         public char AlphabetChar { get; set; }
 
         public bool IsEnabled { get; set; }
+
     }
 }

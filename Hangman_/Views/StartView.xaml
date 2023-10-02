@@ -13,7 +13,8 @@
             <Button Command="{Binding StartGameCommand, Source={x:Static vm:MainViewModel.Instance}}" CommandParameter="fruits" Content="Fruits" Height="30" Width="71"/>
             <Button Command="{Binding StartGameCommand, Source={x:Static vm:MainViewModel.Instance}}" CommandParameter="colors" Content="Colors" Height="30" Width="71"/>
         </StackPanel>
-      
+        <Image Width="300" Height="400" Source="pack://application:,,,/Hangman_;component/Pictures/Hangman/10Guess.jpg"/>
+
 
     </Grid>
 </UserControl>

@@ -22,12 +22,15 @@ namespace Hangman_.ViewModels
 
         public List<CharsOfWord> CharsOfRandomWord { get; set; }
 
-        public HangmanStatus Status { get; set; }
+        public Hangman Hangman { get; set; }
+
+        int countWrongs = 0;
+        int countCorrect = 0;
 
         public GameViewModel(string randomWord)
         {
             RandomWord = randomWord;
-            Status = HangmanStatus.First_Wrong;
+            Hangman = new Hangman();
 
             CreateListOfAlphabet();
             CreateListOfChars();
@@ -71,11 +74,15 @@ namespace Hangman_.ViewModels
 
         private void GuessLetter(object guessedLetter)
         {
+            bool guessCorrect = false;
+
             foreach (CharsOfWord c in CharsOfRandomWord)
             {
                 if (c.WordChar == (char)guessedLetter)
                 {
                     c.CharVisibility = LetterVisibilityStatus.GuessCorrect;
+                    countCorrect++;
+                    guessCorrect = true;
                 }
             }
 
@@ -87,22 +94,31 @@ namespace Hangman_.ViewModels
                 }
             }
 
-            CalculateGuess();
+            if (!guessCorrect)
+            {
+                countWrongs++;
+                Hangman.HangmanStatus = (HangmanStatus)countWrongs;
+            }
+
+            CalculateWin();
         }
 
-        private void CalculateGuess()
+
+        private void CalculateWin()
         {
-            int count = 0;
+            int countChars = 0;
 
             foreach (CharsOfWord c in CharsOfRandomWord)
             {
                 if (c.CharVisibility == LetterVisibilityStatus.GuessCorrect)
                 {
-                    count++;
+                    countChars++;
                 }
             }
-            if (count == CharsOfRandomWord.Count)
+            if (countChars == CharsOfRandomWord.Count)
             {
+                MessageBox.Show($"You guessed the right word: {RandomWord}");
+                //spelet slut!
                 //MainViewModel.Instance.CurrentViewModel = new FinishedViewModel();
             }
         }
