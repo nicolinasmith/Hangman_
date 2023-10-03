@@ -1,9 +1,11 @@
 ﻿using Hangman_.Commands;
 using Hangman_.Enums;
 using Hangman_.Models;
+using Hangman_.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -108,6 +110,7 @@ namespace Hangman_.ViewModels
         {
             if (countWrongs == 10)
             {
+                SoundManager.PlaySound("LostSound");
                 MessageBox.Show("You have lost!");
             }
         }
@@ -125,7 +128,8 @@ namespace Hangman_.ViewModels
             }
             if (countChars == CharsOfRandomWord.Count)
             {
-                MessageBox.Show($"You guessed the right word: {RandomWord}");
+                SoundManager.PlaySound("WonSound");
+                MessageBox.Show($"Congratulations!\n \nYou have guessed the correct word:\n{RandomWord.ToUpper()}.");
                 //spelet slut!
                 //MainViewModel.Instance.CurrentViewModel = new FinishedViewModel();
             }

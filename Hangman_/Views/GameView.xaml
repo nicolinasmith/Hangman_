@@ -12,24 +12,27 @@
         <converter:LetterVisibilityConverter x:Key="LetterVisibilityConverter"/>
         <converter:HangmanConverter x:Key="HangmanConverter"/>
     </UserControl.Resources>
-    
-    <Grid Background="White">
+
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="#FF813333" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="{Binding RandomWord, Source={x:Static vm:MainViewModel.Instance}}" Grid.Row="0" Grid.Column="0" FontSize="20"/>
-        <ItemsControl ItemsSource="{Binding Alphabet}" Grid.Row="2" Grid.Column="1">
+        <ItemsControl ItemsSource="{Binding Alphabet}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Rows="2"/>
@@ -41,39 +44,43 @@
                             Command="{Binding DataContext.GuessLetterCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
                             CommandParameter="{Binding AlphabetChar}" 
                             Margin="5" 
-                            Width="30" 
-                            Height="20"
+                            FontWeight="Bold"
+                            FontSize="20"
+                            Width="50" 
+                            Height="40"
                             IsEnabled="{Binding IsEnabled}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-        <ItemsControl ItemsSource="{Binding CharsOfRandomWord}" Grid.Row="3" Grid.Column="2">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="1"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Border BorderBrush="Black" BorderThickness="3">
-                        <TextBlock Text="{Binding WordChar}" 
-                                   Visibility="{Binding CharVisibility, Converter={StaticResource LetterVisibilityConverter}}"
-                                   Margin="5" 
-                                   TextAlignment="Center" 
-                                   Width="30" 
-                                   Height="20"/>
-                    </Border>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+            <Label Content="Guess the word" FontSize="20" HorizontalContentAlignment="Center"/>
+            <ItemsControl ItemsSource="{Binding CharsOfRandomWord}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="1"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Black" BorderThickness="1" Margin="5" Background="White">
+                            <TextBlock Text="{Binding WordChar}" 
+                                       Visibility="{Binding CharVisibility, Converter={StaticResource LetterVisibilityConverter}}"
+                                       TextAlignment="Center" 
+                                       Width="50" 
+                                       Height="50"/>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
         <Border BorderBrush="Black"
                 BorderThickness="3"
-                Grid.Row="4" 
-                Grid.Column="3"
+                Grid.Row="0" 
+                Grid.Column="1"
                 Height="500" 
-                Width="400" >
-                <Image 
+                Width="400">
+            <Image 
                    Stretch="Fill"
                    Source="{Binding Path=Hangman.HangmanStatus, Converter={StaticResource HangmanConverter}}"/>
         </Border>
