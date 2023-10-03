@@ -13,7 +13,7 @@ using System.Windows.Input;
 
 namespace Hangman_.ViewModels
 {
-    public class MainViewModel : BaseViewModel 
+    public class MainViewModel : BaseViewModel
     {
         private static MainViewModel _instance;
 
@@ -23,9 +23,14 @@ namespace Hangman_.ViewModels
 
         public ICommand StartGameCommand { get; set; }
 
+        public ICommand ToFrontPageCommand { get; set; }
+
+
         DbRepository db = new();
 
         public string RandomWord { get; set; }
+
+        public string ChosenTheme { get; set; }
 
         public IEnumerable<string> WordsByTheme { get; private set; }
 
@@ -33,12 +38,15 @@ namespace Hangman_.ViewModels
         public MainViewModel()
         {
             StartGameCommand = new RelayCommand(chosenTheme => StartGame((string)chosenTheme));
+            ToFrontPageCommand = new RelayCommand(x => BackToStart());
         }
 
 
 
         public async Task StartGame(string chosenTheme)
         {
+            ChosenTheme = $"Chosen theme: {chosenTheme}";
+
             WordsByTheme = await db.GetListFromChosenTheme(chosenTheme);
 
             Random random = new Random();
@@ -47,6 +55,12 @@ namespace Hangman_.ViewModels
 
             MainViewModel.Instance.CurrentViewModel = new GameViewModel(RandomWord);
         }
+
+        public void BackToStart()
+        {
+            MainViewModel.Instance.CurrentViewModel = new StartViewModel();
+        }
+
 
     }
 }

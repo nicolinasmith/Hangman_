@@ -15,10 +15,7 @@
 
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black"/>
-                <GradientStop Color="#FF813333" Offset="1"/>
-            </LinearGradientBrush>
+            <ImageBrush ImageSource="pack://application:,,,/Hangman_;component/Pictures/Forest.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="6*"/>
@@ -32,6 +29,13 @@
             <ColumnDefinition Width="4*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+            <Button Command="{Binding ToFrontPageCommand, Source={x:Static vm:MainViewModel.Instance}}"  Content="Back to start" Width="50" Height="40"/>
+            <Label Content="HANGMAN GAME"/>
+            <Label Content="{Binding ChosenTheme, Source={x:Static vm:MainViewModel.Instance}}"/>
+        </StackPanel>
+
         <ItemsControl ItemsSource="{Binding Alphabet}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -74,12 +78,14 @@
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </StackPanel>
+
         <Border BorderBrush="Black"
                 BorderThickness="3"
                 Grid.Row="0" 
                 Grid.Column="1"
                 Height="500" 
-                Width="400">
+                Width="400"
+                CornerRadius="20">
             <Image 
                    Stretch="Fill"
                    Source="{Binding Path=Hangman.HangmanStatus, Converter={StaticResource HangmanConverter}}"/>

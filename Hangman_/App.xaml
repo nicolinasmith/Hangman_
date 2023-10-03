@@ -12,8 +12,5 @@
         <DataTemplate DataType="{x:Type vm:StartViewModel}">
             <views:StartView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type vm:FinishedViewModel}">
-            <views:FinishedView/>
-        </DataTemplate>
     </Application.Resources>
 </Application>
