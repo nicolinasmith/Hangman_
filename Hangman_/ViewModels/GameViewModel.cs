@@ -101,8 +101,16 @@ namespace Hangman_.ViewModels
             }
 
             CalculateWin();
+            CalculateLost();
         }
 
+        private void CalculateLost()
+        {
+            if (countWrongs == 10)
+            {
+                MessageBox.Show("You have lost!");
+            }
+        }
 
         private void CalculateWin()
         {
