@@ -35,6 +35,6 @@
         <Image Grid.Column="3" Grid.Row="4"
                Width="300" 
                Height="400" 
-               Source="pack://application:,,,/Hangman_;component/Pictures/Hangman/10Guess.jpg"/>
+               Source="pack://application:,,,/Hangman_;component/Pictures/Hangman/8Guess.jpg"/>
     </Grid>
 </UserControl>

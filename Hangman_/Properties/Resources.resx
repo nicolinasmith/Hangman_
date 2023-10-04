@@ -121,8 +121,8 @@
   <data name="Correct" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Correct.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="Lost" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Lost.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="LostBear" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\LostBear.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="Won" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Won.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

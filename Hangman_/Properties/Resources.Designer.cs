@@ -72,9 +72,9 @@ namespace Hangman_.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        internal static System.IO.UnmanagedMemoryStream Lost {
+        internal static System.IO.UnmanagedMemoryStream LostBear {
             get {
-                return ResourceManager.GetStream("Lost", resourceCulture);
+                return ResourceManager.GetStream("LostBear", resourceCulture);
             }
         }
         

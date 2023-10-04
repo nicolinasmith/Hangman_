@@ -48,12 +48,6 @@ namespace Hangman_.Converters
                 case HangmanStatus.Wrong8:
                     return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/8Guess.jpg");
 
-                case HangmanStatus.Wrong9:
-                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/9Guess.jpg");
-
-                case HangmanStatus.Wrong10:
-                    return new Uri("pack://application:,,,/Hangman_;component/Pictures/Hangman/10Guess.jpg");
-
                 default:
                     throw new NotImplementedException();
             }

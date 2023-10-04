@@ -108,7 +108,7 @@ namespace Hangman_.ViewModels
 
         private void CalculateLost()
         {
-            if (countWrongs == 10)
+            if (countWrongs == 8)
             {
                 SoundManager.PlaySound("LostSound");
                 MessageBox.Show("You have lost!");

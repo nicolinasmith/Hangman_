@@ -15,9 +15,7 @@ namespace Hangman_.Resources
         static SoundManager()
         {
             soundDictionary.Add("WonSound", new SoundPlayer(Properties.Resources.Won));
-            soundDictionary.Add("LoseSound", new SoundPlayer(Properties.Resources.Lost));
-            //soundDictionary.Add("CorrectSound", new SoundPlayer(Properties.Resources.Correct));
-            //soundDictionary.Add("WrongSound", new SoundPlayer(Properties.Resources.Wrong));
+            soundDictionary.Add("LostSound", new SoundPlayer(Properties.Resources.LostBear));
         }
 
         public static void PlaySound(string soundKey)
