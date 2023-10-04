@@ -25,6 +25,8 @@ namespace Hangman_.ViewModels
         public List<CharsOfWord> CharsOfRandomWord { get; set; }
 
         public Hangman Hangman { get; set; }
+        
+        public string Tries { get; set; }
 
         int countWrongs = 0;
         int countCorrect = 0;
@@ -32,6 +34,8 @@ namespace Hangman_.ViewModels
         public GameViewModel(string randomWord)
         {
             RandomWord = randomWord;
+            Tries = "0 / 8 wrongs before the bear is awoken";
+
             Hangman = new Hangman();
 
             CreateListOfAlphabet();
@@ -100,6 +104,7 @@ namespace Hangman_.ViewModels
             {
                 countWrongs++;
                 Hangman.HangmanStatus = (HangmanStatus)countWrongs;
+                Tries = $"{countWrongs} / 8 wrongs before the bear is awoken";
             }
 
             CalculateWin();
@@ -110,8 +115,9 @@ namespace Hangman_.ViewModels
         {
             if (countWrongs == 8)
             {
+                GameFinished();
                 SoundManager.PlaySound("LostSound");
-                MessageBox.Show("You have lost!");
+                MessageBox.Show($"The bear is awoken and you have lost.\nThe correct word was:\n{RandomWord.ToUpper()}.");
             }
         }
 
@@ -128,10 +134,22 @@ namespace Hangman_.ViewModels
             }
             if (countChars == CharsOfRandomWord.Count)
             {
+                GameFinished();
                 SoundManager.PlaySound("WonSound");
                 MessageBox.Show($"Congratulations!\n \nYou have guessed the correct word:\n{RandomWord.ToUpper()}.");
-                //spelet slut!
-                //MainViewModel.Instance.CurrentViewModel = new FinishedViewModel();
+            }
+        }
+
+        private void GameFinished()
+        {
+            foreach (CharsOfWord c in CharsOfRandomWord)
+            {
+                c.CharVisibility = LetterVisibilityStatus.GuessCorrect;
+            }
+
+            foreach (AlphabetButton c in Alphabet)
+            {
+                c.IsEnabled = false;
             }
         }
     }

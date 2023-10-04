@@ -7,7 +7,7 @@
              xmlns:converter="clr-namespace:Hangman_.Converters"
              xmlns:local="clr-namespace:Hangman_.Views" d:DataContext="{d:DesignInstance Type=vm:GameViewModel}"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <UserControl.Resources>
         <converter:LetterVisibilityConverter x:Key="LetterVisibilityConverter"/>
         <converter:HangmanConverter x:Key="HangmanConverter"/>
@@ -18,77 +18,82 @@
             <ImageBrush ImageSource="pack://application:,,,/Hangman_;component/Pictures/Forest.jpg"/>
         </Grid.Background>
         <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
-        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
-            <Button Command="{Binding ToFrontPageCommand, Source={x:Static vm:MainViewModel.Instance}}"  Content="Back to start" Width="50" Height="40"/>
-            <Label Content="HANGMAN GAME"/>
-            <Label Content="{Binding ChosenTheme, Source={x:Static vm:MainViewModel.Instance}}"/>
+        <Button Command="{Binding ToFrontPageCommand, Source={x:Static vm:MainViewModel.Instance}}" 
+                Grid.Row="0" Grid.Column="0" 
+                Content="Back to start" 
+                Width="90" Height="40" Margin="10" 
+                HorizontalAlignment="Left" Background="#FF496060"/>
+
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="2" Margin="15">
+            <Label Content="HANGMAN GAME" HorizontalContentAlignment="Center" FontSize="35" FontWeight="Bold"/>
+            <Label Content="Don't wake the bear" FontStyle="Italic" HorizontalContentAlignment="Center" FontSize="15"/>
+            <Label Content="{Binding Tries, FallbackValue=Hej}" HorizontalContentAlignment="Center" FontSize="20"/>
+            <Border BorderBrush="Black"
+                Background="White"
+                BorderThickness="3"
+                Margin="0,30,0,0"
+                Height="570" 
+                Width="470"
+                CornerRadius="15">
+                <Image 
+                   Height="550" 
+                   Width="450"
+                   Stretch="Fill"
+                   Source="{Binding Path=Hangman.HangmanStatus, Converter={StaticResource HangmanConverter}}"/>
+            </Border>
         </StackPanel>
 
-        <ItemsControl ItemsSource="{Binding Alphabet}" Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Rows="2"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Content="{Binding AlphabetChar}" 
-                            Command="{Binding DataContext.GuessLetterCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
-                            CommandParameter="{Binding AlphabetChar}" 
-                            Margin="5" 
-                            FontWeight="Bold"
-                            FontSize="20"
-                            Width="50" 
-                            Height="40"
-                            IsEnabled="{Binding IsEnabled}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
-            <Label Content="Guess the word" FontSize="20" HorizontalContentAlignment="Center"/>
-            <ItemsControl ItemsSource="{Binding CharsOfRandomWord}">
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0" Margin="0,60,0,0">
+            <Label Content="Guess the word to survive" FontSize="30" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+            <Label Content="{Binding ChosenTheme, FallbackValue=Hej, Source={x:Static vm:MainViewModel.Instance}}" HorizontalContentAlignment="Center" FontSize="15" FontStyle="Italic"/>
+            <ItemsControl ItemsSource="{Binding CharsOfRandomWord}" Margin="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Rows="1"/>
+                        <UniformGrid Rows="1" Columns="{Binding CharsOfRandomWord.Count}" HorizontalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Border BorderBrush="Black" BorderThickness="1" Margin="5" Background="White">
+                        <Border BorderBrush="Black" BorderThickness="1" Background="White" HorizontalAlignment="Center"  Margin="5">
                             <TextBlock Text="{Binding WordChar}" 
                                        Visibility="{Binding CharVisibility, Converter={StaticResource LetterVisibilityConverter}}"
                                        TextAlignment="Center" 
                                        Width="50" 
-                                       Height="50"/>
+                                       Height="50"
+                                       FontSize="20"/>
                         </Border>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-        </StackPanel>
 
-        <Border BorderBrush="Black"
-                BorderThickness="3"
-                Grid.Row="0" 
-                Grid.Column="1"
-                Height="500" 
-                Width="400"
-                CornerRadius="20">
-            <Image 
-                   Stretch="Fill"
-                   Source="{Binding Path=Hangman.HangmanStatus, Converter={StaticResource HangmanConverter}}"/>
-        </Border>
+            <ItemsControl ItemsSource="{Binding Alphabet}" Margin="0,150,0,0">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Rows="4" Columns="7" HorizontalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Button Content="{Binding AlphabetChar}" 
+                            Command="{Binding DataContext.GuessLetterCommand, RelativeSource={RelativeSource AncestorType=UserControl}}" 
+                            CommandParameter="{Binding AlphabetChar}" 
+                            Margin="10" 
+                            FontSize="20"
+                            Width="50" 
+                            Height="40"
+                            IsEnabled="{Binding IsEnabled}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
     </Grid>
 </UserControl>
